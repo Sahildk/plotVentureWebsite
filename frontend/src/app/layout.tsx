@@ -33,6 +33,10 @@ export const metadata: Metadata = {
   description: "Your dream home awaits at Plot Venture",
 };
 
+// Force dynamic rendering to ensure CMS updates are reflected immediately
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default function RootLayout({
   children,
 }: Readonly<{
