@@ -32,7 +32,7 @@ export default async function HomePage() {
             soon.
           </p>
           <p className="text-sm text-gray-400">
-            Admin Note: Create a page with slug "home" in Strapi.
+            Admin Note: Create a page with slug &quot;home&quot; in Strapi.
           </p>
         </div>
       </div>
