@@ -1,0 +1,53 @@
+{
+  "kind": "collectionType",
+  "collectionName": "pages",
+  "info": {
+    "singularName": "page",
+    "pluralName": "pages",
+    "displayName": "Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "slug": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "title": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "string"
+    },
+    "sections": {
+      "type": "dynamiczone",
+      "components": [
+        "sections.hero",
+        "sections.features",
+        "sections.about",
+        "sections.stats",
+        "sections.cta"
+      ]
+    },
+    "meta_title": {
+      "type": "string"
+    },
+    "meta_description": {
+      "type": "string"
+    },
+    "show_in_navbar": {
+      "type": "boolean",
+      "default": false
+    },
+    "nav_order": {
+      "type": "integer",
+      "default": 0
+    },
+    "nav_label": {
+      "type": "string"
+    }
+  }
+}

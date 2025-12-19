@@ -1,0 +1,37 @@
+{
+  "kind": "singleType",
+  "collectionName": "site_settings",
+  "info": {
+    "singularName": "site-setting",
+    "pluralName": "site-settings",
+    "displayName": "Site Settings"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "primary_color": {
+      "type": "string"
+    },
+    "contact_phone": {
+      "type": "string"
+    },
+    "contact_email": {
+      "type": "email"
+    },
+    "whatsapp_number": {
+      "type": "string"
+    },
+    "google_maps_embed": {
+      "type": "text"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_sections_abouts",
+  "info": {
+    "displayName": "About",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "badge": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "content": {
+      "type": "richtext"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "stats": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.stat"
+    },
+    "buttons": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.link"
+    }
+  }
+}
