@@ -7,9 +7,9 @@ export default async function LocationPage() {
   const page = await getPage("location");
   const settings = await getSiteSettings();
   
-  const title = page?.attributes?.title || "Location";
-  const subtitle = page?.attributes?.subtitle || "Prime Location, Perfect Connectivity";
-  const content = page?.attributes?.content || `
+  const title = page?.title || "Location";
+  const subtitle = page?.subtitle || "Prime Location, Perfect Connectivity";
+  const content = page?.content || `
     <p>Our development is strategically located in one of the most sought-after areas, offering excellent connectivity and access to all essential amenities.</p>
     <p>The location provides easy access to major highways, business districts, educational institutions, healthcare facilities, and entertainment centers.</p>
   `;

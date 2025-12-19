@@ -14,10 +14,9 @@ export async function GET(request: Request) {
         slug,
         page: page ? {
           id: page.id,
-          slug: page.attributes?.slug,
-          title: page.attributes?.title,
-          published: !!page.attributes?.publishedAt,
-          hasAttributes: !!page.attributes,
+          slug: page.slug,
+          title: page.title,
+          published: !!page.publishedAt,
         } : null,
       });
     } else {
@@ -28,9 +27,9 @@ export async function GET(request: Request) {
         count: pages.length,
         pages: pages.map((page) => ({
           id: page.id,
-          slug: page.attributes?.slug,
-          title: page.attributes?.title,
-          published: !!page.attributes?.publishedAt,
+          slug: page.slug,
+          title: page.title,
+          published: !!page.publishedAt,
         })),
       });
     }
