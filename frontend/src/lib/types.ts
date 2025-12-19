@@ -136,6 +136,7 @@ export interface SiteSettings {
   contact_email?: string;
   contact_phone?: string;
   whatsapp_number?: string;
+  google_maps_embed?: string;
   address?: string;
   logo: StrapiImage | null;
 }
