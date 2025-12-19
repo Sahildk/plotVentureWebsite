@@ -9,9 +9,9 @@ import { formatPhone, getEmailLink, getWhatsAppLink } from "@/lib/helpers";
 export default async function ContactPage() {
   const page = await getPage("contact");
   const settings = await getSiteSettings();
-  
-  const title = page?.attributes?.title || "Contact Us";
-  const subtitle = page?.attributes?.subtitle || "Get in touch with our team";
+
+  const title = page?.title || "Contact Us";
+  const subtitle = page?.subtitle || "Get in touch with our team";
 
   return (
     <div className="pt-24 lg:pt-32">
@@ -22,15 +22,19 @@ export default async function ContactPage() {
           <div className="absolute top-20 left-20 w-96 h-96 bg-gold rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-20 right-20 w-96 h-96 bg-teal-400 rounded-full blur-3xl animate-pulse delay-1000" />
         </div>
-        
+
         <Container className="relative z-10">
           <div className="text-center max-w-4xl mx-auto animate-fade-in-up">
             <div className="inline-block mb-6 px-4 py-2 glass-dark rounded-full text-sm font-medium text-gold border border-gold/30 backdrop-blur-md">
-              Let's Connect
+              Let&apos;s Connect
             </div>
-            <h1 className="font-display text-5xl md:text-7xl font-bold mb-6 leading-tight">{title}</h1>
+            <h1 className="font-display text-5xl md:text-7xl font-bold mb-6 leading-tight">
+              {title}
+            </h1>
             {subtitle && (
-              <p className="text-xl md:text-2xl text-teal-100 max-w-2xl mx-auto">{subtitle}</p>
+              <p className="text-xl md:text-2xl text-teal-100 max-w-2xl mx-auto">
+                {subtitle}
+              </p>
             )}
           </div>
         </Container>
@@ -85,7 +89,9 @@ export default async function ContactPage() {
                   <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-green-500/10 to-green-600/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                     <MessageCircle className="w-7 h-7 text-green-600" />
                   </div>
-                  <CardTitle className="text-xl font-display">WhatsApp</CardTitle>
+                  <CardTitle className="text-xl font-display">
+                    WhatsApp
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <a
@@ -112,7 +118,8 @@ export default async function ContactPage() {
                   Get In Touch
                 </h2>
                 <p className="text-lg text-gray-600">
-                  Fill out the form below and we'll get back to you as soon as possible.
+                  Fill out the form below and we&apos;ll get back to you as soon
+                  as possible.
                 </p>
               </div>
               <Card className="border-0 shadow-soft p-8">
@@ -131,9 +138,12 @@ export default async function ContactPage() {
                     <MapPin className="w-6 h-6 text-teal" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-display font-bold text-gray-900 mb-2">Office Address</h3>
+                    <h3 className="text-xl font-display font-bold text-gray-900 mb-2">
+                      Office Address
+                    </h3>
                     <p className="text-gray-600">
-                      123 Real Estate Avenue<br />
+                      123 Real Estate Avenue
+                      <br />
                       City Center, Country 12345
                     </p>
                   </div>
@@ -146,7 +156,9 @@ export default async function ContactPage() {
                     <Clock className="w-6 h-6 text-gold" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-display font-bold text-gray-900 mb-2">Business Hours</h3>
+                    <h3 className="text-xl font-display font-bold text-gray-900 mb-2">
+                      Business Hours
+                    </h3>
                     <div className="space-y-2 text-gray-600">
                       <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
                       <p>Saturday: 10:00 AM - 4:00 PM</p>

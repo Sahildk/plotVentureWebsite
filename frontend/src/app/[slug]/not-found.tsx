@@ -14,20 +14,21 @@ export default function SlugNotFound() {
             Page Not Found
           </h2>
           <p className="text-xl text-gray-600 mb-8">
-            This page doesn't exist in our system. Please check the URL or return to the homepage.
+            This page doesn&apos;t exist in our system. Please check the URL or
+            return to the homepage.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/">
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 className="bg-gradient-to-r from-teal to-teal-dark hover:from-teal-dark hover:to-teal text-white text-lg px-8 py-7 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               >
                 Go Home
               </Button>
             </Link>
             <Link href="/contact">
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 size="lg"
                 className="border-2 border-gray-300 hover:border-teal text-gray-700 hover:text-teal hover:bg-teal/5 text-lg px-8 py-7 rounded-full transition-all duration-300 hover:scale-105"
               >
@@ -40,4 +41,3 @@ export default function SlugNotFound() {
     </div>
   );
 }
-

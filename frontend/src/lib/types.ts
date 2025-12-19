@@ -129,10 +129,13 @@ export interface GalleryImage {
 }
 
 export interface SiteSettings {
-  siteName: string;
-  siteDescription: string;
-  contactEmail: string;
-  contactPhone: string;
-  address: string;
+  siteName?: string;
+  siteDescription?: string;
+  contactEmail?: string;
+  contactPhone?: string;
+  contact_email?: string;
+  contact_phone?: string;
+  whatsapp_number?: string;
+  address?: string;
   logo: StrapiImage | null;
 }
