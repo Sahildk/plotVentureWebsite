@@ -3,6 +3,10 @@ import { SectionHeading } from "../components/section-heading";
 import { GalleryGrid } from "../components/gallery-grid";
 import { getGalleryImages } from "@/lib/strapi";
 
+// Force dynamic rendering to ensure CMS updates are reflected immediately
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function GalleryPage() {
   const images = await getGalleryImages();
 

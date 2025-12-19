@@ -2,6 +2,10 @@ import { BlockRenderer } from "../components/block-renderer";
 import { getPage } from "@/lib/strapi";
 import { notFound } from "next/navigation";
 
+// Force dynamic rendering to ensure CMS updates are reflected immediately
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 interface PageProps {
   params: Promise<{ slug: string }>;
 }

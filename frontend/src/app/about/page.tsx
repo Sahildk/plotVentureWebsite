@@ -3,6 +3,10 @@ import { SectionHeading } from "../components/section-heading";
 import { getPage, getStrapiImageUrl } from "@/lib/strapi";
 import Image from "next/image";
 
+// Force dynamic rendering to ensure CMS updates are reflected immediately
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function AboutPage() {
   const page = await getPage("about");
   

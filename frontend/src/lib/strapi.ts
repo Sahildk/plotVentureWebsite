@@ -100,7 +100,8 @@ export async function getAllPages(): Promise<Page[]> {
     const res = await fetch(
       `${STRAPI_URL}/api/pages?populate=*&sort=nav_order:asc`,
       {
-        next: { revalidate: 60 },
+        next: { revalidate: 0 },
+        cache: 'no-store',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -180,7 +181,8 @@ export async function getGalleryImages(): Promise<GalleryImage[]> {
     const res = await fetch(
       `${STRAPI_URL}/api/gallery?populate=images`,
       {
-        next: { revalidate: 60 },
+        next: { revalidate: 0 },
+        cache: 'no-store',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -208,7 +210,8 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
     const res = await fetch(
       `${STRAPI_URL}/api/site-settings?populate=*`,
       {
-        next: { revalidate: 300 },
+        next: { revalidate: 0 },
+        cache: 'no-store',
         headers: {
           'Content-Type': 'application/json',
         },

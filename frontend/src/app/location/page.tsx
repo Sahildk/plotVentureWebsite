@@ -3,6 +3,10 @@ import { SectionHeading } from "../components/section-heading";
 import { getPage, getSiteSettings } from "@/lib/strapi";
 import { MapPin, School, Heart, ShoppingBag, Bus } from "lucide-react";
 
+// Force dynamic rendering to ensure CMS updates are reflected immediately
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function LocationPage() {
   const page = await getPage("location");
   const settings = await getSiteSettings();

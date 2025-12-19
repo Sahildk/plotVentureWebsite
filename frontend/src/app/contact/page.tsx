@@ -6,6 +6,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Phone, Mail, MessageCircle, MapPin, Clock } from "lucide-react";
 import { formatPhone, getEmailLink, getWhatsAppLink } from "@/lib/helpers";
 
+// Force dynamic rendering to ensure CMS updates are reflected immediately
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function ContactPage() {
   const page = await getPage("contact");
   const settings = await getSiteSettings();
