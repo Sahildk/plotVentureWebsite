@@ -6,16 +6,16 @@ import Image from "next/image";
 export default async function AboutPage() {
   const page = await getPage("about");
   
-  const title = page?.attributes?.title || "About Plot Venture";
-  const subtitle = page?.attributes?.subtitle || "Building Dreams, Creating Communities";
-  const content = page?.attributes?.content || `
+  const title = page?.title || "About Plot Venture";
+  const subtitle = page?.subtitle || "Building Dreams, Creating Communities";
+  const content = page?.content || `
     <p>Plot Venture is a leading real estate development company with a vision to create exceptional living spaces that combine luxury, comfort, and sustainability.</p>
     <p>With years of experience in the industry, we have successfully delivered numerous projects that have transformed communities and enriched lives.</p>
     <p>Our commitment to quality, innovation, and customer satisfaction sets us apart in the real estate market.</p>
   `;
   
-  const heroImage = page?.attributes?.hero_image?.data
-    ? getStrapiImageUrl(page.attributes.hero_image.data)
+  const heroImage = page?.hero_image
+    ? getStrapiImageUrl(page.hero_image)
     : "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80";
 
   return (
