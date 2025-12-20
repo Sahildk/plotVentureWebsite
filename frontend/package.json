@@ -7,9 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "strapi:dev": "cd server && npm run develop",
-    "strapi:build": "cd server && npm run build",
-    "strapi:start": "cd server && npm start"
+    "strapi:dev": "cd ../backend && npm run develop",
+    "strapi:build": "cd ../backend && npm run build",
+    "strapi:start": "cd ../backend && npm start"
   },
   "dependencies": {
     "next": "14.2.5",
@@ -36,11 +36,3 @@
     "eslint-config-next": "14.2.5"
   }
 }
-
-
-
-
-
-
-
-
