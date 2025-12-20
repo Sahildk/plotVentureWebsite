@@ -12,7 +12,7 @@ export default [
         : {
             origin: [
               "http://localhost:3000",
-              "http://localhost:3001",
+              "https://plot-venture-website.vercel.app/",
               process.env.FRONTEND_URL || "http://localhost:3000",
             ],
           }),
