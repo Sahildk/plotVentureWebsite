@@ -22,12 +22,17 @@ export async function getPage(slug: string): Promise<Page | null> {
     // Always log in production too for debugging this issue
     console.log(`[Strapi DEBUG] Fetching URL: ${url}`);
 
-    const res = await fetch(url, { 
-      next: { revalidate: 0 }, // Disable cache temporarily
+    // Add timestamp to bypass any edge caching
+    const finalUrl = `${url}${url.includes('?') ? '&' : '?'}_t=${Date.now()}`;
+    
+    const res = await fetch(finalUrl, { 
+      next: { revalidate: 0 },
+      cache: 'no-store',
       headers: {
         'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
       },
-      cache: 'no-store', 
     });
 
     if (!res.ok) {
@@ -97,16 +102,16 @@ export async function getPage(slug: string): Promise<Page | null> {
  */
 export async function getAllPages(): Promise<Page[]> {
   try {
-    const res = await fetch(
-      `${STRAPI_URL}/api/pages?populate=*&sort=nav_order:asc`,
-      {
-        next: { revalidate: 0 },
-        cache: 'no-store',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    const url = `${STRAPI_URL}/api/pages?populate=*&sort=nav_order:asc&_t=${Date.now()}`;
+    const res = await fetch(url, {
+      next: { revalidate: 0 },
+      cache: 'no-store',
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+      },
+    });
 
     if (!res.ok) {
       console.error(`Failed to fetch pages: ${res.statusText}`);
@@ -128,16 +133,17 @@ export async function getAllPages(): Promise<Page[]> {
 export async function getNavbarPages(): Promise<Page[]> {
   try {
     // Fetch all published pages, then filter client-side for better compatibility
-    console.log(`[Strapi DEBUG] Fetching navbar pages from: ${STRAPI_URL}/api/pages?populate=*&sort=nav_order:asc`);
-    const res = await fetch(
-      `${STRAPI_URL}/api/pages?populate=*&sort=nav_order:asc`,
-      {
-        next: { revalidate: 0 },
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    const url = `${STRAPI_URL}/api/pages?populate=*&sort=nav_order:asc&_t=${Date.now()}`;
+    console.log(`[Strapi DEBUG] Fetching navbar pages from: ${url}`);
+    const res = await fetch(url, {
+      next: { revalidate: 0 },
+      cache: 'no-store',
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+      },
+    });
 
     if (!res.ok) {
       console.error(`[Strapi ERROR] Failed to fetch navbar pages: ${res.status} ${res.statusText}`);
@@ -178,16 +184,16 @@ export async function getNavbarPages(): Promise<Page[]> {
  */
 export async function getGalleryImages(): Promise<GalleryImage[]> {
   try {
-    const res = await fetch(
-      `${STRAPI_URL}/api/gallery?populate=images`,
-      {
-        next: { revalidate: 0 },
-        cache: 'no-store',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    const url = `${STRAPI_URL}/api/gallery?populate=images&_t=${Date.now()}`;
+    const res = await fetch(url, {
+      next: { revalidate: 0 },
+      cache: 'no-store',
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+      },
+    });
 
     if (!res.ok) {
       console.error(`Failed to fetch gallery: ${res.statusText}`);
@@ -207,16 +213,16 @@ export async function getGalleryImages(): Promise<GalleryImage[]> {
  */
 export async function getSiteSettings(): Promise<SiteSettings | null> {
   try {
-    const res = await fetch(
-      `${STRAPI_URL}/api/site-settings?populate=*`,
-      {
-        next: { revalidate: 0 },
-        cache: 'no-store',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    const url = `${STRAPI_URL}/api/site-settings?populate=*&_t=${Date.now()}`;
+    const res = await fetch(url, {
+      next: { revalidate: 0 },
+      cache: 'no-store',
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+      },
+    });
 
     if (!res.ok) {
       console.error(`Failed to fetch site settings: ${res.statusText}`);

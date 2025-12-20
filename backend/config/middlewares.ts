@@ -7,14 +7,15 @@ export default [
     config: {
       enabled: true,
       headers: "*",
-      origin:
-        process.env.NODE_ENV === "production"
-          ? "*" // Allow all origins in production (Vercel uses dynamic URLs)
-          : [
+      ...(process.env.NODE_ENV === "production"
+        ? {} // In production, don't restrict origin (allows all)
+        : {
+            origin: [
               "http://localhost:3000",
               "http://localhost:3001",
               process.env.FRONTEND_URL || "http://localhost:3000",
             ],
+          }),
     },
   },
   "strapi::poweredBy",
