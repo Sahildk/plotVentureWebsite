@@ -1,4 +1,10 @@
-import { Page, SiteSettings, GalleryImage, StrapiImage, StrapiImageData } from "./types";
+import {
+  Page,
+  SiteSettings,
+  GalleryImage,
+  StrapiImage,
+  StrapiImageData,
+} from "./types";
 
 const STRAPI_URL = process.env.STRAPI_URL || "http://localhost:1337";
 
@@ -15,42 +21,39 @@ export async function getPage(slug: string): Promise<Page | null> {
     const populateQuery = "populate[sections][populate]=*";
 
     const url = `${STRAPI_URL}/api/pages?filters[slug][$eq]=${slug}&${populateQuery}`;
-    
-      console.log(`[Strapi] Fetching page with slug: "${slug}"`);
-      console.log(`[Strapi] API URL: ${url}`);
-    
+
+    console.log(`[Strapi] Fetching page with slug: "${slug}"`);
+    console.log(`[Strapi] API URL: ${url}`);
+
     // Always log in production too for debugging this issue
     console.log(`[Strapi DEBUG] Fetching URL: ${url}`);
 
-    // Add timestamp to bypass any edge caching
-    const finalUrl = `${url}${url.includes('?') ? '&' : '?'}_t=${Date.now()}`;
-    
-    const res = await fetch(finalUrl, { 
-      next: { revalidate: 0 },
-      cache: 'no-store',
+    const res = await fetch(url, {
+      next: { revalidate: 0 }, // Disable cache temporarily
       headers: {
-        'Content-Type': 'application/json',
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'Pragma': 'no-cache',
+        "Content-Type": "application/json",
       },
+      cache: "no-store",
     });
 
     if (!res.ok) {
-      console.error(`[Strapi] Failed to fetch page: ${res.status} ${res.statusText}`);
+      console.error(
+        `[Strapi] Failed to fetch page: ${res.status} ${res.statusText}`
+      );
       const errorText = await res.text();
       console.error(`[Strapi] Error response:`, errorText);
       return null;
     }
 
     const json = await res.json();
-    
+
     // Debug: log the response structure
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === "development") {
       console.log(`[Strapi] Response status: ${res.status}`);
       console.log(`[Strapi] Response data:`, JSON.stringify(json, null, 2));
       console.log(`[Strapi] Data array length:`, json.data?.length || 0);
     }
-    
+
     // Handle both array and single object responses
     let page: Page | null = null;
     if (Array.isArray(json.data)) {
@@ -59,33 +62,36 @@ export async function getPage(slug: string): Promise<Page | null> {
     } else if (json.data) {
       page = json.data;
     }
-    
+
     if (!page) {
       console.warn(`[Strapi] No page found with slug: "${slug}"`);
-      console.warn(`[Strapi] Available pages:`, json.data?.map((p: any) => ({
-        id: p.id,
-        slug: p.slug,
-        published: !!p.publishedAt
-      })) || []);
+      console.warn(
+        `[Strapi] Available pages:`,
+        json.data?.map((p: any) => ({
+          id: p.id,
+          slug: p.slug,
+          published: !!p.publishedAt,
+        })) || []
+      );
       return null;
     }
-    
+
     // In Strapi v5, attributes are merged into the object
     // Check if page is published
     if (!page.publishedAt) {
       console.warn(`[Strapi] Page "${slug}" exists but is not published`);
       return null;
     }
-    
-    if (process.env.NODE_ENV === 'development') {
+
+    if (process.env.NODE_ENV === "development") {
       console.log(`[Strapi] Successfully found page:`, {
         id: page.id,
         slug: page.slug,
         title: page.title,
-        published: !!page.publishedAt
+        published: !!page.publishedAt,
       });
     }
-    
+
     return page;
   } catch (error) {
     console.error("[Strapi] Error fetching page:", error);
@@ -102,16 +108,16 @@ export async function getPage(slug: string): Promise<Page | null> {
  */
 export async function getAllPages(): Promise<Page[]> {
   try {
-    const url = `${STRAPI_URL}/api/pages?populate=*&sort=nav_order:asc&_t=${Date.now()}`;
-    const res = await fetch(url, {
-      next: { revalidate: 0 },
-      cache: 'no-store',
-      headers: {
-        'Content-Type': 'application/json',
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'Pragma': 'no-cache',
-      },
-    });
+    const res = await fetch(
+      `${STRAPI_URL}/api/pages?populate=*&sort=nav_order:asc`,
+      {
+        next: { revalidate: 0 },
+        cache: "no-store",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     if (!res.ok) {
       console.error(`Failed to fetch pages: ${res.statusText}`);
@@ -133,45 +139,51 @@ export async function getAllPages(): Promise<Page[]> {
 export async function getNavbarPages(): Promise<Page[]> {
   try {
     // Fetch all published pages, then filter client-side for better compatibility
-    const url = `${STRAPI_URL}/api/pages?populate=*&sort=nav_order:asc&_t=${Date.now()}`;
-    console.log(`[Strapi DEBUG] Fetching navbar pages from: ${url}`);
-    const res = await fetch(url, {
-      next: { revalidate: 0 },
-      cache: 'no-store',
-      headers: {
-        'Content-Type': 'application/json',
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'Pragma': 'no-cache',
-      },
-    });
+    console.log(
+      `[Strapi DEBUG] Fetching navbar pages from: ${STRAPI_URL}/api/pages?populate=*&sort=nav_order:asc`
+    );
+    const res = await fetch(
+      `${STRAPI_URL}/api/pages?populate=*&sort=nav_order:asc`,
+      {
+        next: { revalidate: 0 },
+        cache: "no-store",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     if (!res.ok) {
-      console.error(`[Strapi ERROR] Failed to fetch navbar pages: ${res.status} ${res.statusText}`);
+      console.error(
+        `[Strapi ERROR] Failed to fetch navbar pages: ${res.status} ${res.statusText}`
+      );
       return [];
     }
 
     const json = await res.json();
-    
+
     // Filter for published pages that should show in navbar, then sort by nav_order
     const pages = (json.data || [])
       .filter((page: Page) => {
-        return (
-          page.publishedAt && 
-          page.show_in_navbar === true
-        );
+        return page.publishedAt && page.show_in_navbar === true;
       })
       .sort((a: Page, b: Page) => {
         const orderA = a.nav_order ?? 999;
         const orderB = b.nav_order ?? 999;
         return orderA - orderB;
       });
-    
-    if (process.env.NODE_ENV === 'development') {
-      console.log(`[Strapi] Found ${pages.length} pages for navbar:`, 
-        pages.map((p: Page) => ({ slug: p.slug, label: p.nav_label || p.title, order: p.nav_order }))
+
+    if (process.env.NODE_ENV === "development") {
+      console.log(
+        `[Strapi] Found ${pages.length} pages for navbar:`,
+        pages.map((p: Page) => ({
+          slug: p.slug,
+          label: p.nav_label || p.title,
+          order: p.nav_order,
+        }))
       );
     }
-    
+
     return pages;
   } catch (error) {
     console.error("Error fetching navbar pages:", error);
@@ -184,14 +196,11 @@ export async function getNavbarPages(): Promise<Page[]> {
  */
 export async function getGalleryImages(): Promise<GalleryImage[]> {
   try {
-    const url = `${STRAPI_URL}/api/gallery?populate=images&_t=${Date.now()}`;
-    const res = await fetch(url, {
+    const res = await fetch(`${STRAPI_URL}/api/gallery?populate=images`, {
       next: { revalidate: 0 },
-      cache: 'no-store',
+      cache: "no-store",
       headers: {
-        'Content-Type': 'application/json',
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'Pragma': 'no-cache',
+        "Content-Type": "application/json",
       },
     });
 
@@ -213,14 +222,11 @@ export async function getGalleryImages(): Promise<GalleryImage[]> {
  */
 export async function getSiteSettings(): Promise<SiteSettings | null> {
   try {
-    const url = `${STRAPI_URL}/api/site-settings?populate=*&_t=${Date.now()}`;
-    const res = await fetch(url, {
+    const res = await fetch(`${STRAPI_URL}/api/site-settings?populate=*`, {
       next: { revalidate: 0 },
-      cache: 'no-store',
+      cache: "no-store",
       headers: {
-        'Content-Type': 'application/json',
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'Pragma': 'no-cache',
+        "Content-Type": "application/json",
       },
     });
 
@@ -240,19 +246,17 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
 /**
  * Get image URL from Strapi image object
  */
-/**
- * Get image URL from Strapi image object
- */
-export function getStrapiImageUrl(image: StrapiImage | null | undefined): string {
+export function getStrapiImageUrl(
+  image: StrapiImage | null | undefined
+): string {
   if (!image?.url) {
     return "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80";
   }
-  
+
   const url = image.url;
   if (url.startsWith("http")) {
     return url;
   }
-  
+
   return `${STRAPI_URL}${url}`;
 }
-

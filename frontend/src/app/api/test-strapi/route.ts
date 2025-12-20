@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { getAllPages, getPage } from "@/lib/strapi";
 
 // Force dynamic rendering
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -10,7 +10,6 @@ export async function GET(request: Request) {
 
   // Debug: Log environment variable
   const strapiUrl = process.env.STRAPI_URL || "http://localhost:1337";
-  
   try {
     if (slug) {
       // Test fetching a specific page
@@ -19,12 +18,14 @@ export async function GET(request: Request) {
         success: true,
         slug,
         strapiUrl,
-        page: page ? {
-          id: page.id,
-          slug: page.slug,
-          title: page.title,
-          published: !!page.publishedAt,
-        } : null,
+        page: page
+          ? {
+              id: page.id,
+              slug: page.slug,
+              title: page.title,
+              published: !!page.publishedAt,
+            }
+          : null,
       });
     } else {
       // Test fetching all pages
@@ -51,4 +52,3 @@ export async function GET(request: Request) {
     );
   }
 }
-

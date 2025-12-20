@@ -5,14 +5,14 @@ import { NavbarWrapper } from "./components/navbar-wrapper";
 import { Footer } from "./components/footer";
 import { SiteWrapper } from "./components/site-wrapper";
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
   preload: true,
 });
 
-const spaceGrotesk = Space_Grotesk({ 
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-space-grotesk",
   display: "swap",
@@ -20,7 +20,7 @@ const spaceGrotesk = Space_Grotesk({
   preload: true,
 });
 
-const manrope = Manrope({ 
+const manrope = Manrope({
   subsets: ["latin"],
   variable: "--font-manrope",
   display: "swap",
@@ -33,17 +33,16 @@ export const metadata: Metadata = {
   description: "Your dream home awaits at Plot Venture",
 };
 
-// Force dynamic rendering to ensure CMS updates are reflected immediately
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} ${manrope.variable}`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${spaceGrotesk.variable} ${manrope.variable}`}
+    >
       <body className={`${inter.className} antialiased`}>
         <SiteWrapper>
           <NavbarWrapper />
@@ -54,4 +53,3 @@ export default function RootLayout({
     </html>
   );
 }
-
