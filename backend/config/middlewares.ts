@@ -1,25 +1,26 @@
 export default [
-  'strapi::logger',
-  'strapi::errors',
-  'strapi::security',
+  "strapi::logger",
+  "strapi::errors",
+  "strapi::security",
   {
-    name: 'strapi::cors',
+    name: "strapi::cors",
     config: {
       enabled: true,
-      headers: '*',
-      origin: process.env.NODE_ENV === 'production' 
-        ? true // Allow all origins in production (Vercel uses dynamic URLs)
-        : [
-            'http://localhost:3000',
-            'http://localhost:3001',
-            process.env.FRONTEND_URL || 'http://localhost:3000',
-          ],
+      headers: "*",
+      origin:
+        process.env.NODE_ENV === "production"
+          ? "*" // Allow all origins in production (Vercel uses dynamic URLs)
+          : [
+              "http://localhost:3000",
+              "http://localhost:3001",
+              process.env.FRONTEND_URL || "http://localhost:3000",
+            ],
     },
   },
-  'strapi::poweredBy',
-  'strapi::query',
-  'strapi::body',
-  'strapi::session',
-  'strapi::favicon',
-  'strapi::public',
+  "strapi::poweredBy",
+  "strapi::query",
+  "strapi::body",
+  "strapi::session",
+  "strapi::favicon",
+  "strapi::public",
 ];
