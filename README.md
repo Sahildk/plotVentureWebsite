@@ -77,8 +77,6 @@ npm install
 - **Backend**: Render / VPS  
 - **Domain**: Connected to client-owned domain  
 
-> Ensure CORS is properly configured on Strapi to allow frontend domain access.
-
 ---
 
 ## 🧪 Testing
