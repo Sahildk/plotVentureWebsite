@@ -67,6 +67,6 @@ From the Admin Panel, the client can:
 ### Frontend Setup
 
 ```bash
-git clone <repository-url>
+git clone [<repository-url>](https://github.com/Sahildk/plotVentureWebsite)
 cd frontend
 npm install
