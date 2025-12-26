@@ -70,3 +70,35 @@ From the Admin Panel, the client can:
 git clone https://github.com/Sahildk/plotVentureWebsite
 cd frontend
 npm install
+```
+## 🌐 Deployment
+
+- **Frontend**: Vercel  
+- **Backend**: Render / VPS  
+- **Domain**: Connected to client-owned domain  
+
+> Ensure CORS is properly configured on Strapi to allow frontend domain access.
+
+---
+
+## 🧪 Testing
+
+- All API endpoints tested  
+- CMS content rendering validated  
+- Responsive checks completed  
+- Production deployment tested  
+
+---
+
+## 📦 Support & Maintenance
+
+- One-time deployment included  
+- CMS allows independent content management  
+- Post-delivery support available as per agreement  
+
+---
+
+## 👨‍💻 Author
+
+Developed by Sahil Deore
+Full-stack Web Developer
