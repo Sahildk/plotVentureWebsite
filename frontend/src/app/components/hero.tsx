@@ -44,11 +44,13 @@ export function Hero({ data }: HeroProps) {
               {data.badge}
             </div>
           )}
-          <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-bold mb-8 leading-[1.1] tracking-tight text-balance">
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold mb-8 leading-[1.1] tracking-tight text-balance " style={{ fontFamily: "Times New Roman" }}>
             <span className="block bg-gradient-to-r from-white via-gold-100 to-white bg-clip-text text-transparent">
-              {title.split(" ").slice(0, -1).join(" ")}
+              Welcome to
             </span>
-            <span className="block text-white">{title.split(" ").slice(-1)[0]}</span>
+            <span className="block bg-gradient-to-r from-white via-gold-100 to-white bg-clip-text text-transparent">
+              Plot Venture
+            </span>
           </h1>
           <p className="text-xl md:text-2xl lg:text-3xl mb-12 text-gray-200 font-light max-w-2xl mx-auto leading-relaxed text-balance">
             {subtitle}
